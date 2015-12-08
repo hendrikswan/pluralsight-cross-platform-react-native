@@ -21,7 +21,7 @@ function todos(state = defaultState, action) {
         });
     case 'DONE_TODO':
         const newTodos = state.todos.map((todo) => {
-            if(todo !== action.todo){
+            if (todo !== action.todo) {
                 return todo;
             }
 
