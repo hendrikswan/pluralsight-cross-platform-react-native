@@ -1,0 +1,3 @@
+rootProject.name = 'CrossTodo2'
+
+include ':app'
