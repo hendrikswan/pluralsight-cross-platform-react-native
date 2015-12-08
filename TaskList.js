@@ -63,17 +63,9 @@ class TaskList extends React.Component {
     }
 
     addPressed(task) {
-        // this.props.nav.push({
-        //     name: 'taskform',
-        //     onAdd: (todo) => {
-        //         this.todos.push(todo);
-        //         this.updateDataSource();
-        //     },
-        // });
-
-        store.dispatch({
-            type: 'ADD_TODO',
-            text: 'testing 123',
+        this.props.nav.push({
+            name: 'taskform',
+            onAdd: this.props.onTodoAdd,
         });
     }
 
@@ -113,6 +105,7 @@ TaskList.propTypes = {
     //     push: React.PropTypes.func,
     // }).isRequired,
     // onTodoDone: React.PropTypes.func.isRequired,
+    onTodoAdd: React.PropTypes.func.isRequired,
     selectedState: React.PropTypes.string.isRequired,
     todos: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 };

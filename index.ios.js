@@ -24,7 +24,7 @@ class CrossTodo extends Component {
         store.subscribe(this.copyState.bind(this));
     }
 
-    copyState(){
+    copyState() {
         this.setState(store.getState());
     }
 
@@ -37,6 +37,13 @@ class CrossTodo extends Component {
     handleTodoDone(todo) {
         // todo.state = 'Done';
         // this.setState({todos: this.state.todos});
+    }
+
+    onTodoAdd(task) {
+        store.dispatch({
+            type: 'ADD_TODO',
+            task: task,
+        });
     }
 
     renderScene(route, nav) {
@@ -53,6 +60,7 @@ class CrossTodo extends Component {
             return (
                 <TaskList
                     nav={nav}
+                    onTodoAdd={this.onTodoAdd}
                     onTodoDone={this.handleTodoDone.bind(this)}
                     route={route}
                     selectedState={this.state.selectedState}

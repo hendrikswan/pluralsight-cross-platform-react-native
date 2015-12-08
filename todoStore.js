@@ -15,7 +15,7 @@ function todos(state = defaultState, action) {
     case 'ADD_TODO':
         return Object.assign({}, state, {
             todos: state.todos.concat([{
-                task: action.text,
+                task: action.task,
                 state: 'Pending',
             }]),
         });

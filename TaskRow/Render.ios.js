@@ -8,6 +8,13 @@ const {
 
 import Swipeout from 'react-native-swipeout';
 
+const TestFunctionC = () => {
+    return (
+        <Text>
+            hello!
+        </Text>
+    );
+};
 
 
 export default function() {
@@ -62,6 +69,8 @@ export default function() {
                             >
                                 {this.props.todo.task}
                             </Text>
+
+                            <TestFunctionC />
                     </View>
                 </Swipeout>
             </Animated.View>
