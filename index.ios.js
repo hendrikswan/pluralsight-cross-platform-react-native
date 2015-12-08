@@ -1,55 +1,81 @@
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
- */
-'use strict';
+ *
+*/
 
-var React = require('react-native');
-var {
+const React = require('react-native');
+const {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View,
+  Component,
+  Navigator,
 } = React;
 
-import todos from './todoStore';
+import TaskList from './TaskList';
+import TaskForm from './TaskForm';
 
-var CrossTodo2 = React.createClass({
-  render: function() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
-  }
-});
+import store from './todoStore';
 
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+class CrossTodo extends Component {
 
-AppRegistry.registerComponent('CrossTodo2', () => CrossTodo2);
+    constructor(props) {
+        super(props);
+        this.state = store.getState();
+        store.subscribe(this.copyState.bind(this));
+    }
+
+    copyState(){
+        this.setState(store.getState());
+    }
+
+    getRememberHandler(id) {
+        return (component) => {
+            this[id] = component;
+        };
+    }
+
+    handleTodoDone(todo) {
+        // todo.state = 'Done';
+        // this.setState({todos: this.state.todos});
+    }
+
+    renderScene(route, nav) {
+        const state = store.getState();
+        switch (route.name) {
+        case 'taskform':
+            return (
+                <TaskForm
+                    nav={nav}
+                    route={route}
+                />
+            );
+        default:
+            return (
+                <TaskList
+                    nav={nav}
+                    onTodoDone={this.handleTodoDone.bind(this)}
+                    route={route}
+                    selectedState={this.state.selectedState}
+                    todos={this.state.todos}
+                />
+            );
+        }
+    }
+
+    configureScene() {
+        return Navigator.SceneConfigs.FloatFromBottom;
+    }
+
+    render() {
+        return (
+            <Navigator
+                configureScene={this.configureScene}
+                initialRoute={{name: 'tasklist', index: 0}}
+                ref={this.getRememberHandler.bind(this)('navigator')}
+                renderScene={this.renderScene.bind(this)}
+            />
+        );
+    }
+}
+
+AppRegistry.registerComponent('CrossTodo2', () => CrossTodo);
