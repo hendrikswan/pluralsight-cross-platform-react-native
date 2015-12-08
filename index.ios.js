@@ -37,6 +37,10 @@ class CrossTodo extends Component {
     handleTodoDone(todo) {
         // todo.state = 'Done';
         // this.setState({todos: this.state.todos});
+        store.dispatch({
+            type: 'DONE_TODO',
+            todo: todo,
+        });
     }
 
     onTodoAdd(task) {

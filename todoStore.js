@@ -19,6 +19,20 @@ function todos(state = defaultState, action) {
                 state: 'Pending',
             }]),
         });
+    case 'DONE_TODO':
+        const newTodos = state.todos.map((todo) => {
+            if(todo !== action.todo){
+                return todo;
+            }
+
+            return Object.assign({}, todo, {
+                state: 'Done',
+            });
+        });
+
+        return Object.assign({}, state, {
+            todos: newTodos,
+        });
     default:
         return state;
     }

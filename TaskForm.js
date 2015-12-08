@@ -103,7 +103,7 @@ class TaskForm extends React.Component {
 }
 
 TaskForm.propTypes = {
-    nav: React.PropTypes.object.required,
+    nav: React.PropTypes.func.required,
     onCancel: React.PropTypes.func.required,
     route: React.PropTypes.object.required,
 };
