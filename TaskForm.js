@@ -47,9 +47,6 @@ class TaskForm extends React.Component {
     }
 
     cancelPressed() {
-        if (this.props.route.onCancel) {
-            this.props.route.onCancel();
-        }
         this.props.nav.pop();
     }
 
@@ -103,9 +100,10 @@ class TaskForm extends React.Component {
 }
 
 TaskForm.propTypes = {
-    nav: React.PropTypes.func.required,
-    onCancel: React.PropTypes.func.required,
-    route: React.PropTypes.object.required,
+    nav: React.PropTypes.shape({
+        push: React.PropTypes.func,
+        pop: React.PropTypes.func,
+    }).isRequired,
 };
 
 export default TaskForm;

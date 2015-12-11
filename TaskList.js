@@ -101,9 +101,9 @@ class TaskList extends React.Component {
 }
 
 TaskList.propTypes = {
-    // nav: React.PropTypes.shape({
-    //     push: React.PropTypes.func,
-    // }).isRequired,
+    nav: React.PropTypes.shape({
+        push: React.PropTypes.func,
+    }).isRequired,
     onTodoAdd: React.PropTypes.func.isRequired,
     onTodoDone: React.PropTypes.func.isRequired,
     selectedState: React.PropTypes.string.isRequired,
